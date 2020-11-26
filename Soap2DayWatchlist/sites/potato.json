@@ -1,0 +1,29 @@
+{
+    "baseUrl": "soap2day.to",
+    "pages": {
+        "home": "/",
+        "faq": "/faq",
+        "movies": {
+            "path": "/movielist/",
+            "options": {
+                "cat": "genre",
+                "year": "year",
+                "sort": "sort"
+            },
+            "args": {
+                "page": "page"
+            }
+        },
+        "series": {
+            "path": "/tvlist/",
+            "options": {
+                "cat": "genre",
+                "year": "year",
+                "sort": "sort"
+            },
+            "args": {
+                "page": "page"
+            }
+        }
+    }
+}
