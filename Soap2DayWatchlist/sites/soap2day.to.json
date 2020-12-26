@@ -2,7 +2,9 @@
     "baseUrl": "soap2day.to",
     "acceptsHttps": true,
     "pages": {
-        "home": "/",
+        "home": {
+            "path": "/"
+        },
         "faq": "/faq",
         "movies": {
             "path": "/movielist/",

@@ -1,44 +1,17 @@
 import json
 import os
-
 import requests
 
-site_meta_schema = {
-  "$schema": "https://json-schema.org/schema#",
-  "type": "object",
-  "properties": {
-    "baseUrl": {
-      "type": "string"
-    },
-    "acceptsHttps": {
-      "type": "boolean"
-    },
-    "pages": {
-      "type": "object",
-      "properties": {
-      	"type": ["string","object"]
-      }
-    }
-  },
-  "required": [
-    "baseUrl",
-    "acceptsHttps",
-    "pages"
-  ]
-}
 
-def main(args):
-    print("1")
-    Application(sites_enable=["soap2day.to"])
-    print(2)
-    Application(sites_disable=["soap2day.to"])
-    print(3)
-    Application()
+class SiteData:
+    def __init__():
+        pass
 
-
-class Application:
+class SitesLoader:
     def __init__(self, sites_enable=[], sites_disable=[]):
         # Load sites data from sites folder
+        # TODO: Make this an argument so it can be dynamic.
+        self.sites_dir = './sites'
         site_files = self.load_sites()
 
         self.site_metas = []
@@ -52,9 +25,10 @@ class Application:
         self.validate_enabled()
 
     def load_sites(self):
+        """ Method to load sites from the sites folder. """
         sites = []
-        if os.path.isdir("./sites"):
-            sites = os.listdir("./sites")
+        if os.path.isdir(self.sites_dir):
+            sites = os.listdir(self.sites_dir)
 
         return sites
 
@@ -68,9 +42,15 @@ class Application:
             else:
                 uri += "http"
             uri += "://" + meta["baseUrl"]
-            uri = ("https" if meta["acceptsHttps"] else "http") + "://" + meta["baseUrl"]
+            uri = ("https" if meta["acceptsHttps"]
+                   else "http") + "://" + meta["baseUrl"]
             is_valid = is_site_valid(uri)
             print(is_valid)
+
+    @staticmethod
+    def retrieve_sites(sites_enable=[], sites_disable=[]):
+        loader = SitesLoader(sites_enable=[], sites_disable=[])
+        loader
 
 
 def is_site_valid(uri: str) -> bool:

@@ -1,10 +1,34 @@
 from argparse import ArgumentParser
-import run
+from sites_loader import SitesLoader
 
-def setup_parser():
-	parser = ArgumentParser()
+site_meta_schema = {
+    "$schema": "https://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "baseUrl": {
+            "type": "string"
+        },
+        "acceptsHttps": {
+            "type": "boolean"
+        },
+        "pages": {
+            "type": "object",
+            "properties": {
+                "type": ["string", "object"]
+            }
+        }
+    },
+    "required": [
+        "baseUrl",
+        "acceptsHttps",
+        "pages"
+    ]
+}
 
-	return parser.parse_args()
+
+def main():
+    loader = SitesLoader()
+
 
 if __name__ == "__main__":
-	run.main(setup_parser())
+    main()
